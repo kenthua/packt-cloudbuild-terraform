@@ -2,6 +2,7 @@ timeout: 3600s
 steps:
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
+  dir: single/
   env:
   - "TF_IN_AUTOMATION=true"
   entrypoint: 'sh'
@@ -9,17 +10,19 @@ steps:
   - '-c'
   - | 
     terraform init -input=false
-- id: 'tf destroy plan'
+- id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
+  dir: single/
   env:
   - "TF_IN_AUTOMATION=true"
   entrypoint: 'sh'
   args: 
   - '-c'
   - | 
-    terraform plan -input=false -destroy -out terraform.tfplan
+    terraform plan -input=false -out terraform.tfplan
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
+  dir: single/
   env:
   - "TF_IN_AUTOMATION=true"
   entrypoint: 'sh'
@@ -27,3 +30,8 @@ steps:
   - '-c'
   - | 
     terraform apply -input=false terraform.tfplan
+# artifacts:
+#   objects:
+#     location: 'gs://kenthua-test-standalone/'
+#     paths:
+#     - "terraform.tfplan"
