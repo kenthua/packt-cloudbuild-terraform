@@ -1,4 +1,4 @@
-resource "google_compute_instance" "main" {
+resource "google_compute_instance" "packt_instance" {
   name         = var.instance_name
   machine_type = var.instance_machine_type
   boot_disk {
@@ -7,6 +7,6 @@ resource "google_compute_instance" "main" {
     }
   }
   network_interface {
-    subnetwork = var.subnet_name
+    subnetwork = google_compute_subnetwork.packt_subnet.name
   }
 }

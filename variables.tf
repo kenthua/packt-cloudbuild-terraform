@@ -16,16 +16,28 @@ variable "zone" {
   default     = "us-west1-a"  
 }
 
+variable "network_name" {  
+  description = "The name of the network to be used when deploying resources"  
+  type        = string  
+  default     = "packt-network" 
+}
+
 variable "subnet_name" {  
   description = "The name of the subnet to be used when deploying resources"  
   type        = string  
-  default     = "default"  
+  default     = "packt-subnet"  
+}
+
+variable "subnet_cidr" {  
+  description = "The name of the subnet to be used when deploying resources"  
+  type        = string  
+  default     = "10.128.0.0/24"  
 }
 
 variable "instance_name" {  
   description = "The name of the GCE VM instance named to be provisioned"  
   type        = string  
-  default     = "test-instance"  
+  default     = "packt-instance"  
 }   
 
 variable "instance_machine_type" {  
