@@ -1,7 +1,7 @@
 variable "instance_name" {  
   description = "The name of the GCE VM instance named to be provisioned"  
   type        = string  
-  default     = "packt-instance"  
+  default     = "packt-m-instance"  
 }   
 
 variable "instance_machine_type" {  
