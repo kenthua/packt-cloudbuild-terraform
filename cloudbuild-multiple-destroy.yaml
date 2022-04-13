@@ -1,5 +1,35 @@
 timeout: 3600s
 steps:
+- id: 'tf init - compute'
+  name: 'hashicorp/terraform:1.0.0'
+  dir: multiple/compute
+  env:
+  - "TF_IN_AUTOMATION=true"
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform init -input=false
+- id: 'tf plan - compute'
+  name: 'hashicorp/terraform:1.0.0'
+  dir: multiple/compute
+  env:
+  - "TF_IN_AUTOMATION=true"
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform plan -input=false -destroy -out terraform-vpc.tfplan
+- id: 'tf apply - compute'
+  name: 'hashicorp/terraform:1.0.0'
+  dir: multiple/compute
+  env:
+  - "TF_IN_AUTOMATION=true"
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform apply -input=false terraform-vpc.tfplan
 - id: 'tf init - vpc'
   name: 'hashicorp/terraform:1.0.0'
   dir: multiple/vpc
@@ -30,33 +60,3 @@ steps:
   - '-c'
   - | 
     terraform apply -input=false terraform-vpc.tfplan
-- id: 'tf init - compute'
-  name: 'hashicorp/terraform:1.0.0'
-  dir: multiple/compute
-  env:
-  - "TF_IN_AUTOMATION=true"
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    terraform init -input=false
-- id: 'tf plan - compute'
-  name: 'hashicorp/terraform:1.0.0'
-  dir: multiple/compute
-  env:
-  - "TF_IN_AUTOMATION=true"
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    terraform plan -input=false -destroy -out terraform-vpc.tfplan
-- id: 'tf apply - compute'
-  name: 'hashicorp/terraform:1.0.0'
-  dir: multiple/compute
-  env:
-  - "TF_IN_AUTOMATION=true"
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    terraform apply -input=false terraform-vpc.tfplan    
