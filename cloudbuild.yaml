@@ -30,8 +30,3 @@ steps:
   - '-c'
   - | 
     terraform apply -input=false terraform.tfplan
-# artifacts:
-#   objects:
-#     location: 'gs://kenthua-test-standalone/'
-#     paths:
-#     - "terraform.tfplan"

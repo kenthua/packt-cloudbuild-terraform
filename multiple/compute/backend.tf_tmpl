@@ -1,6 +1,6 @@
 terraform { 
   backend "gcs" { 
-    bucket      = "kenthua-test-standalone" 
+    bucket      = "${PROJECT_ID}" 
     prefix      = "tfstate/compute" 
   }
 }

@@ -2,7 +2,7 @@ data "terraform_remote_state" "vpc" {
   backend = "gcs"
 
   config = {
-    bucket  = "kenthua-test-standalone"
+    bucket  = "${PROJECT_ID}"
     prefix  = "tfstate/vpc"
   }
 }

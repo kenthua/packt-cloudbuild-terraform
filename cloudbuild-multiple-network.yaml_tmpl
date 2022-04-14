@@ -31,3 +31,5 @@ steps:
   - | 
     terraform apply -input=false terraform-vpc.tfplan
 serviceAccount: 'projects/${PROJECT_ID}/serviceAccounts/${CLOUDBUILD_NETWORK}@${PROJECT_ID}.iam.gserviceaccount.com'
+options:
+  logging: CLOUD_LOGGING_ONLY
